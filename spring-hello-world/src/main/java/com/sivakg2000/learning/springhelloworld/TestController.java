@@ -8,7 +8,7 @@ public class TestController
 {
     @RequestMapping("/test")
     public String  getSampleResponse(){
-        return "Sprint Hello World ";
+        return "Sprint Hello World 2";
     }
 
 
