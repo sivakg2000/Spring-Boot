@@ -16,25 +16,25 @@ public class UserService {
     //@Autowired
     //private PasswordEncoder passwordEncoder;
 
-    public User createUser(User user){
+    public User create(User user){
         return userRepository.save(user);
     }
 
-    public List<User> getAllUser(){
+    public List<User> getAll(){
         return userRepository.findAll();
     }
 
-    public User getUserByEmail(String email){
+    public User getByEmail(String email){
         Optional<User>  user=userRepository.findByEmail(email);
         return user.orElse(null);
     }
 
-    public User getUserById(int id){
+    public User getById(int id){
         Optional<User>  user=userRepository.findById(id);
         return user.orElse(null);
     }
 
-    public User updateUser(int id,User user){
+    public User update(int id,User user){
         Optional<User>  oldUser=userRepository.findById(user.getId());
         if(oldUser.isPresent() && oldUser.get().getId()==id){
             userRepository.save(user);
@@ -44,7 +44,7 @@ public class UserService {
         }
 
     }
-    public void deleteUserById(int id){
+    public void deleteById(int id){
         userRepository.deleteById(id);
     }
 

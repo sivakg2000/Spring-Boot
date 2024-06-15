@@ -25,11 +25,11 @@ public class UserController {
     private UserService userService;
 
     @PostMapping
-    public ResponseEntity<User> createUser(@Valid @RequestBody User user){
-        if(userService.getUserByEmail(user.getEmail())==null) {
+    public ResponseEntity<User> create(@Valid @RequestBody User user){
+        if(userService.getByEmail(user.getEmail())==null) {
             //String hashedPassword = passwordEncoder.encode(user.getPassword());
             //user.setPassword(hashedPassword);
-            User newUser = userService.createUser(user);
+            User newUser = userService.create(user);
             return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
         }else{
             throw new DuplicateKeyException("Email Already Exist.");
@@ -37,29 +37,29 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers(){
-        return userService.getAllUser();
+    public List<User> getAll(){
+        return userService.getAll();
     }
 
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable int id){
-        return userService.getUserById(id);
+    public User getById(@PathVariable int id){
+        return userService.getById(id);
     }
 
 
     @GetMapping("/by-email/{email}")
-    public User getUserByEmail(@PathVariable String  email){
-        return userService.getUserByEmail(email);
+    public User getByEmail(@PathVariable String  email){
+        return userService.getByEmail(email);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUserById(@PathVariable int id,@RequestBody User user){
+    public ResponseEntity<User> updateById(@PathVariable int id,@RequestBody User user){
 
-        if(userService.getUserByEmail(user.getEmail())==null) {
+        if(userService.getByEmail(user.getEmail())==null) {
             //String hashedPassword = passwordEncoder.encode(user.getPassword());
             //user.setPassword(hashedPassword);
-            userService.updateUser(id, user);
+            userService.update(id, user);
             return new ResponseEntity<User>(user, HttpStatus.CREATED);
         }else{
             throw new DuplicateKeyException("Email Already Exist.");
@@ -68,13 +68,13 @@ public class UserController {
 
 
     @DeleteMapping("/{id}")
-    public void deleteUserById(@PathVariable int id){
-         userService.deleteUserById(id);
+    public void deleteById(@PathVariable int id){
+         userService.deleteById(id);
     }
 
 
     @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestBody User user) {
+    public ResponseEntity<String> login(@RequestBody User user) {
         boolean isAuthenticated = userService.authenticate(user.getEmail(),user.getPassword());
         if (isAuthenticated) {
             return ResponseEntity.ok("Login successful");

@@ -26,7 +26,6 @@ public class User {
     @NotEmpty(message = "email is required")
     @Column(nullable = false,unique = true)
     private String email;
-
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @NotEmpty(message = "Password is required")
     private String password;
