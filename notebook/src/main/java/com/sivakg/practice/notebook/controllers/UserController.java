@@ -1,7 +1,11 @@
 package com.sivakg.practice.notebook.controllers;
 
 
+import com.sivakg.practice.notebook.entities.Note;
+import com.sivakg.practice.notebook.entities.NoteBook;
 import com.sivakg.practice.notebook.entities.User;
+import com.sivakg.practice.notebook.services.NoteBookService;
+import com.sivakg.practice.notebook.services.NoteService;
 import com.sivakg.practice.notebook.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +27,12 @@ public class UserController {
     //private PasswordEncoder passwordEncoder;
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private NoteBookService noteBookService;
+
+    @Autowired
+    private NoteService noteService;
 
     @PostMapping
     public ResponseEntity<User> create(@Valid @RequestBody User user){
@@ -81,6 +91,17 @@ public class UserController {
         } else {
             return ResponseEntity.status(401).body("Invalid credentials");
         }
+    }
+
+    @GetMapping("/{userid}/note-book")
+    public NoteBook getNoteBookByUserid(@PathVariable int userid){
+        return noteBookService.getById(userid);
+    }
+
+
+    @GetMapping("/{userid}/note-book/notes")
+    public List<Note> getNoteBookNotesByUserid(@PathVariable int userid){
+        return noteService.getAllByUserId(userid);
     }
 
 

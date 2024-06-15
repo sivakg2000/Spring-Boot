@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/note-book")
+@RequestMapping("/note")
 public class NoteController {
 
     @Autowired

@@ -31,6 +31,10 @@ public class NoteService {
         return noteBook.orElse(null);
     }
 
+    public List<Note> getAllByUserId(int userid){
+        return noteRepository.findAllByUserid(userid).orElse(null);
+    }
+
     public Note update(int id,Note note){
         Optional<Note>  oldNote=noteRepository.findById(note.getId());
         if(oldNote.isPresent() && oldNote.get().getId()==id){
