@@ -101,7 +101,8 @@ public class UserController {
 
     @GetMapping("/{userid}/note-book/notes")
     public List<Note> getNoteBookNotesByUserid(@PathVariable int userid){
-        return noteService.getAllByUserId(userid);
+        NoteBook noteBook= noteBookService.getById(userid);;
+        return noteService.getAllByNoteBook(noteBook);
     }
 
 

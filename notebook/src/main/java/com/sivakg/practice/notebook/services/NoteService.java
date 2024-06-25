@@ -2,6 +2,7 @@ package com.sivakg.practice.notebook.services;
 
 import com.sivakg.practice.notebook.entities.Note;
 import com.sivakg.practice.notebook.entities.NoteBook;
+import com.sivakg.practice.notebook.entities.User;
 import com.sivakg.practice.notebook.repositories.NoteBookRepository;
 import com.sivakg.practice.notebook.repositories.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,8 @@ public class NoteService {
         return noteBook.orElse(null);
     }
 
-    public List<Note> getAllByUserId(int userid){
-        return noteRepository.findAllByUserid(userid).orElse(null);
+    public List<Note> getAllByNoteBook(NoteBook noteBook){
+        return noteRepository.findAllByNoteBook(noteBook).orElse(null);
     }
 
     public Note update(int id,Note note){

@@ -20,9 +20,7 @@ public class NoteController {
 
     @PostMapping
     public Note create(@Valid @RequestBody Note note) {
-
         return noteService.create(note);
-
     }
     @GetMapping
     public List<Note> getAll(){
